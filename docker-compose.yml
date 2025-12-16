@@ -21,7 +21,11 @@ services:
     container_name: nba-belt-php
     volumes:
       - ./:/var/www
+      - /var/www/vendor
     environment:
+      - BALLDONTLIE_API_KEY=${BALLDONTLIE_API_KEY}
+      - DB_PATH=/var/www/database/belt.db
+      - ENVIRONMENT=development
       - PHP_OPCACHE_ENABLE=1
     networks:
       - nba-belt-network

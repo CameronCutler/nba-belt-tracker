@@ -6,7 +6,7 @@ use Exception;
 
 class BallDontLieClient
 {
-	private string $apiKey;
+	private string $apiKey = 'c15f166e-08f8-4c3f-b96e-60b9cdd7a2a2';
 	private string $baseUrl = 'https://api.balldontlie.io/v1';
 
 	public function __construct(string $apiKey)

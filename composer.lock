@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63638b10c157b9a9e1342e56b0d2b9dc",
+    "content-hash": "6d0bc4532e3073e5aea07440cf41013d",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -16,7 +16,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/GrahamCampbell/Result-Type/3ba905c11371512af9d9bdd27d99b782216b6945",
+                "url": "https://api.github.com/repos/GrahamCampbell/Result-Type/zipball/3ba905c11371512af9d9bdd27d99b782216b6945",
                 "reference": "3ba905c11371512af9d9bdd27d99b782216b6945",
                 "shasum": ""
             },
@@ -33,6 +33,7 @@
                     "GrahamCampbell\\ResultType\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -77,7 +78,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/nikic/FastRoute/181d480e08d9476e61381e04a71b34dc0432e812",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/181d480e08d9476e61381e04a71b34dc0432e812",
                 "reference": "181d480e08d9476e61381e04a71b34dc0432e812",
                 "shasum": ""
             },
@@ -96,6 +97,7 @@
                     "FastRoute\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -126,7 +128,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/Nyholm/psr7/a71f2b11690f4b24d099d6b16690a90ae14fc6f3",
+                "url": "https://api.github.com/repos/Nyholm/psr7/zipball/a71f2b11690f4b24d099d6b16690a90ae14fc6f3",
                 "reference": "a71f2b11690f4b24d099d6b16690a90ae14fc6f3",
                 "shasum": ""
             },
@@ -158,6 +160,7 @@
                     "Nyholm\\Psr7\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -203,7 +206,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/Nyholm/psr7-server/4335801d851f554ca43fa6e7d2602141538854dc",
+                "url": "https://api.github.com/repos/Nyholm/psr7-server/zipball/4335801d851f554ca43fa6e7d2602141538854dc",
                 "reference": "4335801d851f554ca43fa6e7d2602141538854dc",
                 "shasum": ""
             },
@@ -223,6 +226,7 @@
                     "Nyholm\\Psr7Server\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -268,7 +272,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/schmittjoh/php-option/638a154f8d4ee6a5cfa96d6a34dfbe0cffa9566d",
+                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/638a154f8d4ee6a5cfa96d6a34dfbe0cffa9566d",
                 "reference": "638a154f8d4ee6a5cfa96d6a34dfbe0cffa9566d",
                 "shasum": ""
             },
@@ -294,6 +298,7 @@
                     "PhpOption\\": "src/PhpOption/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
@@ -342,7 +347,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/php-fig/container/c71ecc56dfe541dbd90c5360474fbc405f8d5963",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/c71ecc56dfe541dbd90c5360474fbc405f8d5963",
                 "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963",
                 "shasum": ""
             },
@@ -360,6 +365,7 @@
                     "Psr\\Container\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -394,7 +400,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/php-fig/http-factory/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
                 "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
                 "shasum": ""
             },
@@ -413,6 +419,7 @@
                     "Psr\\Http\\Message\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -448,7 +455,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/php-fig/http-message/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
                 "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
                 "shasum": ""
             },
@@ -466,6 +473,7 @@
                     "Psr\\Http\\Message\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -500,7 +508,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/php-fig/http-server-handler/84c4fb66179be4caaf8e97bd239203245302e7d4",
+                "url": "https://api.github.com/repos/php-fig/http-server-handler/zipball/84c4fb66179be4caaf8e97bd239203245302e7d4",
                 "reference": "84c4fb66179be4caaf8e97bd239203245302e7d4",
                 "shasum": ""
             },
@@ -519,6 +527,7 @@
                     "Psr\\Http\\Server\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -555,7 +564,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/php-fig/http-server-middleware/c1481f747daaa6a0782775cd6a8c26a1bf4a3829",
+                "url": "https://api.github.com/repos/php-fig/http-server-middleware/zipball/c1481f747daaa6a0782775cd6a8c26a1bf4a3829",
                 "reference": "c1481f747daaa6a0782775cd6a8c26a1bf4a3829",
                 "shasum": ""
             },
@@ -575,6 +584,7 @@
                     "Psr\\Http\\Server\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -611,7 +621,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/php-fig/log/f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
                 "reference": "f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
                 "shasum": ""
             },
@@ -629,6 +639,7 @@
                     "Psr\\Log\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -660,7 +671,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/slimphp/Slim/887893516557506f254d950425ce7f5387a26970",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/887893516557506f254d950425ce7f5387a26970",
                 "reference": "887893516557506f254d950425ce7f5387a26970",
                 "shasum": ""
             },
@@ -705,6 +716,7 @@
                     "Slim\\": "Slim"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -775,7 +787,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/symfony/polyfill-ctype/a3cc8b044a6ea513310cbd48ef7333b384945638",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/a3cc8b044a6ea513310cbd48ef7333b384945638",
                 "reference": "a3cc8b044a6ea513310cbd48ef7333b384945638",
                 "shasum": ""
             },
@@ -803,6 +815,7 @@
                     "Symfony\\Polyfill\\Ctype\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -857,7 +870,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/symfony/polyfill-mbstring/6d857f4d76bd4b343eac26d6b539585d2bc56493",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6d857f4d76bd4b343eac26d6b539585d2bc56493",
                 "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493",
                 "shasum": ""
             },
@@ -886,6 +899,7 @@
                     "Symfony\\Polyfill\\Mbstring\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -941,7 +955,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/symfony/polyfill-php80/0cc9dd0f17f61d8131e7df6b84bd344899fe2608",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/0cc9dd0f17f61d8131e7df6b84bd344899fe2608",
                 "reference": "0cc9dd0f17f61d8131e7df6b84bd344899fe2608",
                 "shasum": ""
             },
@@ -966,6 +980,7 @@
                     "Resources/stubs"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1024,7 +1039,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/vlucas/phpdotenv/24ac4c74f91ee2c193fa1aaa5c249cb0822809af",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/24ac4c74f91ee2c193fa1aaa5c249cb0822809af",
                 "reference": "24ac4c74f91ee2c193fa1aaa5c249cb0822809af",
                 "shasum": ""
             },
@@ -1060,6 +1075,7 @@
                     "Dotenv\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1109,7 +1125,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/doctrine/instantiator/c6222283fa3f4ac679f8b9ced9a4e23f163e80d0",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/c6222283fa3f4ac679f8b9ced9a4e23f163e80d0",
                 "reference": "c6222283fa3f4ac679f8b9ced9a4e23f163e80d0",
                 "shasum": ""
             },
@@ -1132,6 +1148,7 @@
                     "Doctrine\\Instantiator\\": "src/Doctrine/Instantiator/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1178,7 +1195,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/myclabs/DeepCopy/07d290f0c47959fd5eed98c95ee5602db07e0b6a",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/07d290f0c47959fd5eed98c95ee5602db07e0b6a",
                 "reference": "07d290f0c47959fd5eed98c95ee5602db07e0b6a",
                 "shasum": ""
             },
@@ -1204,6 +1221,7 @@
                     "DeepCopy\\": "src/DeepCopy/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1237,7 +1255,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/nikic/PHP-Parser/dca41cd15c2ac9d055ad70dbfd011130757d1f82",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dca41cd15c2ac9d055ad70dbfd011130757d1f82",
                 "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82",
                 "shasum": ""
             },
@@ -1265,6 +1283,7 @@
                     "PhpParser\\": "lib/PhpParser"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1294,7 +1313,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/phar-io/manifest/54750ef60c58e43759730615a392c31c80e23176",
+                "url": "https://api.github.com/repos/phar-io/manifest/zipball/54750ef60c58e43759730615a392c31c80e23176",
                 "reference": "54750ef60c58e43759730615a392c31c80e23176",
                 "shasum": ""
             },
@@ -1317,6 +1336,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1360,7 +1380,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/phar-io/version/4f7fd7836c6f332bb2933569e566a0d6c4cbed74",
+                "url": "https://api.github.com/repos/phar-io/version/zipball/4f7fd7836c6f332bb2933569e566a0d6c4cbed74",
                 "reference": "4f7fd7836c6f332bb2933569e566a0d6c4cbed74",
                 "shasum": ""
             },
@@ -1373,6 +1393,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1410,7 +1431,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/php-code-coverage/85402a822d1ecf1db1096959413d35e1c37cf1a5",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/85402a822d1ecf1db1096959413d35e1c37cf1a5",
                 "reference": "85402a822d1ecf1db1096959413d35e1c37cf1a5",
                 "shasum": ""
             },
@@ -1447,6 +1468,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1487,7 +1509,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/php-file-iterator/cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf",
                 "reference": "cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf",
                 "shasum": ""
             },
@@ -1508,6 +1530,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1546,7 +1569,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/php-invoker/5a10147d0aaf65b58940a0b72f71c9ac0423cc67",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-invoker/zipball/5a10147d0aaf65b58940a0b72f71c9ac0423cc67",
                 "reference": "5a10147d0aaf65b58940a0b72f71c9ac0423cc67",
                 "shasum": ""
             },
@@ -1571,6 +1594,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1608,7 +1632,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/php-text-template/5da5f67fc95621df9ff4c4e5a84d6a8a2acf7c28",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/5da5f67fc95621df9ff4c4e5a84d6a8a2acf7c28",
                 "reference": "5da5f67fc95621df9ff4c4e5a84d6a8a2acf7c28",
                 "shasum": ""
             },
@@ -1629,6 +1653,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1666,7 +1691,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/php-timer/5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2",
                 "reference": "5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2",
                 "shasum": ""
             },
@@ -1687,6 +1712,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1724,7 +1750,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/phpunit/945d0b7f346a084ce5549e95289962972c4272e5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/945d0b7f346a084ce5549e95289962972c4272e5",
                 "reference": "945d0b7f346a084ce5549e95289962972c4272e5",
                 "shasum": ""
             },
@@ -1778,6 +1804,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1834,7 +1861,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/cli-parser/2b56bea83a09de3ac06bb18b92f068e60cc6f50b",
+                "url": "https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/2b56bea83a09de3ac06bb18b92f068e60cc6f50b",
                 "reference": "2b56bea83a09de3ac06bb18b92f068e60cc6f50b",
                 "shasum": ""
             },
@@ -1855,6 +1882,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1889,7 +1917,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/code-unit/1fc9f64c0927627ef78ba436c9b17d967e68e120",
+                "url": "https://api.github.com/repos/sebastianbergmann/code-unit/zipball/1fc9f64c0927627ef78ba436c9b17d967e68e120",
                 "reference": "1fc9f64c0927627ef78ba436c9b17d967e68e120",
                 "shasum": ""
             },
@@ -1910,6 +1938,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1944,7 +1973,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/code-unit-reverse-lookup/ac91f01ccec49fb77bdc6fd1e548bc70f7faa3e5",
+                "url": "https://api.github.com/repos/sebastianbergmann/code-unit-reverse-lookup/zipball/ac91f01ccec49fb77bdc6fd1e548bc70f7faa3e5",
                 "reference": "ac91f01ccec49fb77bdc6fd1e548bc70f7faa3e5",
                 "shasum": ""
             },
@@ -1965,6 +1994,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1998,7 +2028,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/comparator/67a2df3a62639eab2cc5906065e9805d4fd5dfc5",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/67a2df3a62639eab2cc5906065e9805d4fd5dfc5",
                 "reference": "67a2df3a62639eab2cc5906065e9805d4fd5dfc5",
                 "shasum": ""
             },
@@ -2021,6 +2051,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2083,7 +2114,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/complexity/25f207c40d62b8b7aa32f5ab026c53561964053a",
+                "url": "https://api.github.com/repos/sebastianbergmann/complexity/zipball/25f207c40d62b8b7aa32f5ab026c53561964053a",
                 "reference": "25f207c40d62b8b7aa32f5ab026c53561964053a",
                 "shasum": ""
             },
@@ -2105,6 +2136,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2139,7 +2171,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/diff/ba01945089c3a293b01ba9badc29ad55b106b0bc",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/ba01945089c3a293b01ba9badc29ad55b106b0bc",
                 "reference": "ba01945089c3a293b01ba9badc29ad55b106b0bc",
                 "shasum": ""
             },
@@ -2161,6 +2193,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2204,7 +2237,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/environment/830c43a844f1f8d5b7a1f6d6076b784454d8b7ed",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/830c43a844f1f8d5b7a1f6d6076b784454d8b7ed",
                 "reference": "830c43a844f1f8d5b7a1f6d6076b784454d8b7ed",
                 "shasum": ""
             },
@@ -2228,6 +2261,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2266,7 +2300,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/exporter/14c6ba52f95a36c3d27c835d65efc7123c446e8c",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/14c6ba52f95a36c3d27c835d65efc7123c446e8c",
                 "reference": "14c6ba52f95a36c3d27c835d65efc7123c446e8c",
                 "shasum": ""
             },
@@ -2289,6 +2323,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2354,7 +2389,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/global-state/b6781316bdcd28260904e7cc18ec983d0d2ef4f6",
+                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/b6781316bdcd28260904e7cc18ec983d0d2ef4f6",
                 "reference": "b6781316bdcd28260904e7cc18ec983d0d2ef4f6",
                 "shasum": ""
             },
@@ -2381,6 +2416,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2429,7 +2465,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/lines-of-code/e1e4a170560925c26d424b6a03aed157e7dcc5c5",
+                "url": "https://api.github.com/repos/sebastianbergmann/lines-of-code/zipball/e1e4a170560925c26d424b6a03aed157e7dcc5c5",
                 "reference": "e1e4a170560925c26d424b6a03aed157e7dcc5c5",
                 "shasum": ""
             },
@@ -2451,6 +2487,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2485,7 +2522,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/object-enumerator/5c9eeac41b290a3712d88851518825ad78f45c71",
+                "url": "https://api.github.com/repos/sebastianbergmann/object-enumerator/zipball/5c9eeac41b290a3712d88851518825ad78f45c71",
                 "reference": "5c9eeac41b290a3712d88851518825ad78f45c71",
                 "shasum": ""
             },
@@ -2508,6 +2545,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2541,7 +2579,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/object-reflector/b4f479ebdbf63ac605d183ece17d8d7fe49c15c7",
+                "url": "https://api.github.com/repos/sebastianbergmann/object-reflector/zipball/b4f479ebdbf63ac605d183ece17d8d7fe49c15c7",
                 "reference": "b4f479ebdbf63ac605d183ece17d8d7fe49c15c7",
                 "shasum": ""
             },
@@ -2562,6 +2600,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2595,7 +2634,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/recursion-context/539c6691e0623af6dc6f9c20384c120f963465a0",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/539c6691e0623af6dc6f9c20384c120f963465a0",
                 "reference": "539c6691e0623af6dc6f9c20384c120f963465a0",
                 "shasum": ""
             },
@@ -2616,6 +2655,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2669,7 +2709,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/resource-operations/05d5692a7993ecccd56a03e40cd7e5b09b1d404e",
+                "url": "https://api.github.com/repos/sebastianbergmann/resource-operations/zipball/05d5692a7993ecccd56a03e40cd7e5b09b1d404e",
                 "reference": "05d5692a7993ecccd56a03e40cd7e5b09b1d404e",
                 "shasum": ""
             },
@@ -2690,6 +2730,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2722,7 +2763,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/type/75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7",
+                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7",
                 "reference": "75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7",
                 "shasum": ""
             },
@@ -2743,6 +2784,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2777,7 +2819,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/sebastianbergmann/version/c6c1022351a901512170118436c764e473f6de8c",
+                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/c6c1022351a901512170118436c764e473f6de8c",
                 "reference": "c6c1022351a901512170118436c764e473f6de8c",
                 "shasum": ""
             },
@@ -2795,6 +2837,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2829,7 +2872,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://artifacts.paycomhq.com/artifactory/api/composer/php-remote/vcs-dists/zip/theseer/tokenizer/b7489ce515e168639d17feec34b8847c326b0b3c",
+                "url": "https://api.github.com/repos/theseer/tokenizer/zipball/b7489ce515e168639d17feec34b8847c326b0b3c",
                 "reference": "b7489ce515e168639d17feec34b8847c326b0b3c",
                 "shasum": ""
             },
@@ -2845,6 +2888,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2871,12 +2915,14 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }

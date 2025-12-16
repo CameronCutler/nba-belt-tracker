@@ -32,7 +32,7 @@ COPY . /var/www
 RUN chown -R www-data:www-data /var/www
 
 # Install PHP deps
-RUN #composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader
 
 # Expose port 9000
 EXPOSE 9000
