@@ -5,8 +5,8 @@ require __DIR__ . '/../vendor/autoload.php';
 use NbaBelt\Database\Connection;
 
 // Load environment
-$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();
+// $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+// $dotenv->load();
 
 // Get db path from env or use default
 $dbPath = $_ENV['DB_PATH'] ?? __DIR__ . '/belt.db';
