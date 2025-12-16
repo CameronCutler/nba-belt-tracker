@@ -39,7 +39,7 @@ try {
 
     // Fetch teams from the API
     echo "Fetching teams from Ball Don't Lie API...\n";
-    $response = $ballDontLie->getActiveTeams();
+    $response = $ballDontLieClient->getActiveTeams();
     $teams = $response['data'] ?? [];
     if (empty($teams)) {
         throw new Exception("No teams data retrieved from the API.");
