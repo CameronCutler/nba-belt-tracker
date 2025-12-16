@@ -1,0 +1,40 @@
+{
+    "name": "cameroncutler/nba-belt-tracker",
+    "description": "Tracks the NBA championship belt through the season",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cameron Cutler",
+            "email": "cameron.t.cutler@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "slim/slim": "^4.0",
+        "nyholm/psr7": "^1.5",
+        "nyholm/psr7-server": "^1.0",
+        "vlucas/phpdotenv": "^5.5",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "NbaBelt\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NbaBelt\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

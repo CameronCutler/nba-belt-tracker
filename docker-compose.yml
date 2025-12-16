@@ -1,0 +1,37 @@
+services:
+  # Nginx Web Server
+  nginx:
+    image: nginx:alpine
+    container_name: nba-belt-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - nba-belt-network
+
+  # PHP-FPM Service
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nba-belt-php
+    volumes:
+      - ./:/var/www
+    environment:
+      - PHP_OPCACHE_ENABLE=1
+    networks:
+      - nba-belt-network
+
+networks:
+  nba-belt-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
+#volumes:
+#  db_data:
