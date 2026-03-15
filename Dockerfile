@@ -34,6 +34,16 @@ RUN chown -R www-data:www-data /var/www
 # Install PHP deps
 RUN composer install --no-dev --optimize-autoloader
 
+# Create database directory and set permissions
+RUN mkdir -p /var/www/database && chown -R www-data:www-data /var/www/database
+
+# Run database setup and seeding (continue on errors to see all issues)
+RUN php database/migrate.php || echo "Migration failed" && \
+    php database/seed_teams_simple.php || echo "Team seeding failed" && \
+    php database/init_belt.php || echo "Belt init failed" && \
+    php database/seed_games_simple.php || echo "Game seeding failed" && \
+    chown www-data:www-data /var/www/database/belt.db || echo "Chown failed"
+
 # Expose port 9000
 EXPOSE 9000
 CMD ["php-fpm"]

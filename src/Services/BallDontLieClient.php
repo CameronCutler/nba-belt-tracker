@@ -169,12 +169,34 @@ class BallDontLieClient
 	 * @return array
 	 * @throws Exception
 	 */
+	/**
+	 * Get all games for a specific NBA season.
+	 *
+	 * Ball Don't Lie paginates results with a max of 100 per page. This method will
+	 * automatically fetch all pages for the season.
+	 *
+	 * @param int $seasonYear The starting year of the season (e.g., 2025 for 2025-2026)
+	 * @return array
+	 * @throws Exception
+	 */
 	public function getGamesForSeason(int $seasonYear): array
 	{
 		$startDate = "{$seasonYear}-10-01";
 		$endDate = date('Y-m-d'); // Current date, or could calculate season end
 
-		return $this->getGames($startDate, $endDate, 100);
+		$allGames = [];
+		$cursor = null;
+
+		do {
+			$response = $this->getGames($startDate, $endDate, 100, $cursor);
+			$games = $response['data'] ?? [];
+			$allGames = array_merge($allGames, $games);
+
+			$meta = $response['meta'] ?? [];
+			$cursor = $meta['next_cursor'] ?? null;
+		} while ($cursor);
+
+		return $allGames;
 	}
 
 } // class end

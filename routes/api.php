@@ -33,9 +33,80 @@ return function ($app, $ballDontLie) {
 		try {
 			$gameRepo = new GameRepository();
 			$beltGames = $gameRepo->getCurrentSeasonBeltGames();
+
+			// If no belt games found, return a helpful message with debug info
+			if (empty($beltGames)) {
+				$currentSeason = $gameRepo->getCurrentSeasonYear();
+
+				// Check if there are any games at all
+				$allGames = $gameRepo->getGamesBySeason($currentSeason);
+				$allGamesCount = count($allGames);
+
+				// Check belt history
+				$beltRepo = new NbaBelt\Repositories\BeltHistoryRepository();
+				$currentHolder = $beltRepo->getCurrentBeltHolder();
+
+				// Check for seeding logs
+				$logs = [];
+				$logFiles = [
+					'migrate.log',
+					'seed_teams.log', 
+					'init_belt.log',
+					'seed_games.log'
+				];
+				foreach ($logFiles as $logFile) {
+					$logPath = "/var/www/database/{$logFile}";
+					if (file_exists($logPath)) {
+						$logs[$logFile] = file_get_contents($logPath);
+					} else {
+						$logs[$logFile] = "Log file not found: {$logPath}";
+					}
+				}
+
+				return JsonResponse::success($response, [
+					'message' => 'No belt games found for current season',
+					'debug' => [
+						'current_season' => $currentSeason,
+						'total_games_in_season' => $allGamesCount,
+						'current_belt_holder' => $currentHolder ? $currentHolder['full_name'] : 'None',
+						'sample_games' => array_slice($allGames, 0, 3),
+						'seeding_logs' => $logs
+					]
+				]);
+			}
+
 			return JsonResponse::success($response, $beltGames);
 		} catch (Exception $e) {
 			return JsonResponse::error($response, 'Failed to fetch belt games: ' . $e->getMessage());
+		}
+	});
+
+// POST endpoint to manually seed games (for testing)
+	$app->post('/api/admin/seed-games', function (Request $request, Response $response) {
+		try {
+			// Run the seeding scripts in order
+			$scripts = [
+				'database/migrate.php',
+				'database/seed_teams_simple.php', 
+				'database/init_belt.php',
+				'database/seed_games_simple.php'
+			];
+			
+			$output = [];
+			foreach ($scripts as $script) {
+				$cmdOutput = shell_exec("cd /var/www && php {$script} 2>&1");
+				$output[] = [
+					'script' => $script,
+					'output' => $cmdOutput
+				];
+			}
+			
+			return JsonResponse::success($response, [
+				'message' => 'Seeding completed',
+				'results' => $output
+			]);
+		} catch (Exception $e) {
+			return JsonResponse::error($response, 'Failed to seed: ' . $e->getMessage());
 		}
 	});
 

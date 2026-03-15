@@ -76,7 +76,7 @@ class GameRepository
      */
     public function create(array $data): bool
     {
-        $sql = 'INSERT INTO games (id, game_date, home_team_id, away_team_id, home_score, away_score, season, belt_involved, winner_team_id)
+        $sql = 'INSERT OR REPLACE INTO games (id, game_date, home_team_id, away_team_id, home_score, away_score, season, belt_involved, winner_team_id)
                 VALUES (:id, :game_date, :home_team_id, :away_team_id, :home_score, :away_score, :season, :belt_involved, :winner_team_id)';
 
         $stmt = $this->db->prepare($sql);
@@ -205,7 +205,7 @@ class GameRepository
      *
      * @return int Current season start year
      */
-    private function getCurrentSeasonYear(): int
+    public function getCurrentSeasonYear(): int
     {
         $currentMonth = (int) date('n');
         $currentYear = (int) date('Y');
