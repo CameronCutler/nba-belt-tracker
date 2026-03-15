@@ -8,6 +8,9 @@ database/*belt.db
 vendor/
 node_modules/
 
+# Local SSL certificates
+certs/
+
 # Environment files
 .env
 .env.local
