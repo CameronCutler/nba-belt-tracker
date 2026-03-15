@@ -93,12 +93,12 @@ try {
             echo "Fetched " . count($apiGames) . " games from API.\n";
             $games = processApiGames($apiGames, $currentSeason);
         } else {
-            throw new Exception("No games returned from API");
+            echo "No new games to seed (database is up to date).\n";
+            return;
         }
     } catch (Exception $e) {
         echo "API fetch failed: " . $e->getMessage() . "\n";
-        echo "Falling back to sample game data...\n";
-        // $games = getSampleGames($currentSeason);
+        return;
     }
 
     if (empty($games)) {
@@ -144,7 +144,7 @@ try {
     }
 
     echo "Successfully seeded " . count($games) . " games.\n";
-    echo "Belt has transferred {$transferCount} times during the season.\n";
+    echo "Belt has transferred {$transferCount} times during this batch of games.\n";
 
     // Show final belt holder
     $currentHolder = $beltRepository->getCurrentBeltHolder();
