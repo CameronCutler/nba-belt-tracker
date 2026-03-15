@@ -46,22 +46,6 @@ return function ($app, $ballDontLie) {
 				$beltRepo = new NbaBelt\Repositories\BeltHistoryRepository();
 				$currentHolder = $beltRepo->getCurrentBeltHolder();
 
-				// Check for seeding logs
-				$logs = [];
-				$logFiles = [
-					'migrate.log',
-					'seed_teams.log', 
-					'init_belt.log',
-					'seed_games.log'
-				];
-				foreach ($logFiles as $logFile) {
-					$logPath = "/var/www/database/{$logFile}";
-					if (file_exists($logPath)) {
-						$logs[$logFile] = file_get_contents($logPath);
-					} else {
-						$logs[$logFile] = "Log file not found: {$logPath}";
-					}
-				}
 
 				return JsonResponse::success($response, [
 					'message' => 'No belt games found for current season',
@@ -69,8 +53,7 @@ return function ($app, $ballDontLie) {
 						'current_season' => $currentSeason,
 						'total_games_in_season' => $allGamesCount,
 						'current_belt_holder' => $currentHolder ? $currentHolder['full_name'] : 'None',
-						'sample_games' => array_slice($allGames, 0, 3),
-						'seeding_logs' => $logs
+						'sample_games' => array_slice($allGames, 0, 3)
 					]
 				]);
 			}
@@ -84,22 +67,11 @@ return function ($app, $ballDontLie) {
 // POST endpoint to manually seed games (for testing)
 	$app->post('/api/admin/seed-games', function (Request $request, Response $response) {
 		try {
-			// Run the seeding scripts in order
-			$scripts = [
-				'database/migrate.php',
-				'database/seed_teams_simple.php', 
-				'database/init_belt.php',
-				'database/seed_games_simple.php'
-			];
-			
-			$output = [];
-			foreach ($scripts as $script) {
-				$cmdOutput = shell_exec("cd /var/www && php {$script} 2>&1");
-				$output[] = [
-					'script' => $script,
-					'output' => $cmdOutput
-				];
-			}
+// Run the unified setup script (migrations + seeding)
+		$cmdOutput = shell_exec("cd /var/www && php database/setup.php 2>&1");
+		$output = [
+			[ 'script' => 'database/setup.php', 'output' => $cmdOutput ]
+		];
 			
 			return JsonResponse::success($response, [
 				'message' => 'Seeding completed',

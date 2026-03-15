@@ -1,25 +1,18 @@
 <?php
 
-// Completely offline team seeding - no API calls
-echo "Starting seed_teams_simple.php...\n";
-echo "Current working directory: " . getcwd() . "\n";
-echo "Script directory: " . __DIR__ . "\n";
-
-require __DIR__ . '/../vendor/autoload.php';
-echo "Autoload loaded\n";
-
-use NbaBelt\Database\Connection;
+require_once __DIR__ . '/common.php';
 
 echo " NBA Belt Tracker - Seed Teams (Offline)\n";
 echo "-----------------------------------------\n\n";
 
+
 try {
     // Initialize database connection
-    $dbPath = $_ENV['DB_PATH'] ?? __DIR__ . '/belt.db';
+    $dbPath = db_get_path();
     echo "Database path: {$dbPath}\n";
     echo "Database file exists: " . (file_exists($dbPath) ? 'YES' : 'NO') . "\n";
 
-    Connection::getInstance($dbPath);
+    $pdo = db_init($dbPath);
     echo "Database connection established.\n";
 
     // Hardcoded team data - All NBA teams from Ball Don't Lie API
@@ -299,7 +292,6 @@ try {
     echo "Seeding " . count($teams) . " teams into the database...\n";
 
     // Insert teams into database
-    $pdo = Connection::getInstance();
     $sql = "INSERT OR IGNORE INTO teams (id, name, full_name, abbreviation, city, conference, division) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
 

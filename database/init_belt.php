@@ -1,25 +1,17 @@
 <?php
 
-// Completely offline belt initialization - no API calls
-echo "Starting init_belt.php...\n";
-echo "Current working directory: " . getcwd() . "\n";
-echo "Script directory: " . __DIR__ . "\n";
-
-require __DIR__ . '/../vendor/autoload.php';
-echo "Autoload loaded successfully\n";
-
-use NbaBelt\Database\Connection;
+require_once __DIR__ . '/common.php';
 
 echo " NBA Belt Tracker - Initialize Belt History (Offline)\n";
 echo "-----------------------------------------------------\n\n";
 
 try {
     // Initialize database connection
-    $dbPath = $_ENV['DB_PATH'] ?? __DIR__ . '/belt.db';
+    $dbPath = db_get_path();
     echo "Database path: {$dbPath}\n";
     echo "Database file exists: " . (file_exists($dbPath) ? 'YES' : 'NO') . "\n";
 
-    Connection::getInstance($dbPath);
+    $pdo = db_init($dbPath);
     echo "Database connection established.\n";
 
     // Hardcoded champion data - OKC Thunder won 2024-2025 NBA Finals
@@ -32,7 +24,6 @@ try {
     echo "Initializing belt history with OKC Thunder (2024-2025 champions)...\n";
 
     // Insert directly into database
-    $pdo = Connection::getInstance();
     $sql = "INSERT OR REPLACE INTO belt_history (id, team_id, acquired_date, notes) VALUES (1, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $result = $stmt->execute([

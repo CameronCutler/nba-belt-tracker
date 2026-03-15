@@ -38,11 +38,8 @@ RUN composer install --no-dev --optimize-autoloader
 RUN mkdir -p /var/www/database && chown -R www-data:www-data /var/www/database
 
 # Run database setup and seeding (continue on errors to see all issues)
-RUN php database/migrate.php || echo "Migration failed" && \
-    php database/seed_teams_simple.php || echo "Team seeding failed" && \
-    php database/init_belt.php || echo "Belt init failed" && \
-    php database/seed_games_simple.php || echo "Game seeding failed" && \
-    chown www-data:www-data /var/www/database/belt.db || echo "Chown failed"
+RUN chown www-data:www-data /var/www/database/belt.db || echo "Chown failed" && \
+    php database/setup.php || echo "Database setup failed"
 
 # Expose port 9000
 EXPOSE 9000

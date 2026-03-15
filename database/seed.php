@@ -1,9 +1,8 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/common.php';
 
 use NbaBelt\Services\BallDontLieClient;
-use NbaBelt\Database\Connection;
 use NbaBelt\Repositories\TeamRepository;
 
 echo " NBA Belt Tracker - Database Seed Script\n";
@@ -13,7 +12,7 @@ try {
     // Initialize database connection
     $dbPath = $_ENV['DB_PATH'] ?? __DIR__ . '/belt.db';
     $apiKey = $_ENV['BALLDONTLIE_API_KEY'] ?? null;
-    Connection::getInstance($dbPath);
+    db_init($dbPath);
     echo "Database connection established at: $dbPath\n";
 
     // Initialize API client

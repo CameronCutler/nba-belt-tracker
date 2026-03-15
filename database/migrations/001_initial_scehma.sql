@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS belt_history (
     FOREIGN KEY (team_id) REFERENCES teams(id)
     );
 
--- Games table (optional but useful)
+-- Games table
 -- Cache of games where belt was involved
 CREATE TABLE IF NOT EXISTS games (
                                      id INTEGER PRIMARY KEY,

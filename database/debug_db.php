@@ -1,9 +1,7 @@
 <?php
 
-// Debug script to check database contents
-require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/common.php';
 
-use NbaBelt\Database\Connection;
 use NbaBelt\Repositories\GameRepository;
 use NbaBelt\Repositories\BeltHistoryRepository;
 
@@ -11,9 +9,8 @@ echo "Database Debug Info\n";
 echo "===================\n\n";
 
 try {
-    $dbPath = __DIR__ . '/belt.db';
-    Connection::getInstance($dbPath);
-    $pdo = Connection::getInstance();
+    $dbPath = db_get_path();
+    $pdo = db_init($dbPath);
 
     // Check games table
     $stmt = $pdo->query('SELECT COUNT(*) as count FROM games');

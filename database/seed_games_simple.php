@@ -1,14 +1,7 @@
 <?php
 
-// Simple games seeding with belt history updates
-echo "Starting seed_games_simple.php...\n";
-echo "Current working directory: " . getcwd() . "\n";
-echo "Script directory: " . __DIR__ . "\n";
+require_once __DIR__ . '/common.php';
 
-require __DIR__ . '/../vendor/autoload.php';
-echo "Autoload loaded successfully\n";
-
-use NbaBelt\Database\Connection;
 use NbaBelt\Repositories\GameRepository;
 use NbaBelt\Repositories\BeltHistoryRepository;
 use NbaBelt\Services\BallDontLieClient;
@@ -18,11 +11,11 @@ echo "----------------------------------------\n\n";
 
 try {
     // Initialize database connection
-    $dbPath = $_ENV['DB_PATH'] ?? __DIR__ . '/belt.db';
+    $dbPath = db_get_path();
     echo "Database path: {$dbPath}\n";
     echo "Database file exists: " . (file_exists($dbPath) ? 'YES' : 'NO') . "\n";
 
-    Connection::getInstance($dbPath);
+    $pdo = db_init($dbPath);
     echo "Database connection established.\n";
 
     // Initialize repositories
@@ -30,7 +23,7 @@ try {
     $beltRepository = new BeltHistoryRepository();
 
     // Current season (2025-2026)
-    $currentSeason = 2025;
+    $currentSeason = $gameRepository->getCurrentSeasonYear();
 
     // Try to fetch real games from API, fall back to sample data if needed
     $games = [];
@@ -42,7 +35,7 @@ try {
 
         // Only fetch new games that are not already in the database.
         // This keeps the build idempotent and avoids re-downloading the whole season every time.
-        $lastGameDate = getLastSeededGameDate(Connection::getInstance());
+        $lastGameDate = getLastSeededGameDate($pdo);
         if ($lastGameDate) {
             // Add one day so we don't reprocess the last inserted game
             $startDate = date('Y-m-d', strtotime($lastGameDate . ' +1 day'));
@@ -112,7 +105,7 @@ try {
     echo "Processing " . count($games) . " games for belt logic...\n";
 
     // Insert games and handle belt transfers
-    $pdo = Connection::getInstance();
+    // $pdo is already initialized via db_init()
     $transferCount = 0;
 
     // If multiple runs happen, using the API game ID avoids duplicate insertion.
@@ -395,7 +388,7 @@ function getTeamName(int $teamId): string
     static $teamCache = [];
 
     if (!isset($teamCache[$teamId])) {
-        $pdo = Connection::getInstance();
+        $pdo = db_init();
         $stmt = $pdo->prepare("SELECT abbreviation FROM teams WHERE id = ?");
         $stmt->execute([$teamId]);
         $team = $stmt->fetch();
