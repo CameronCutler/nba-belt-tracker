@@ -27,7 +27,10 @@ try {
 
     // Try to fetch real games from API, fall back to sample data if needed
     $games = [];
-    $apiKey = $_ENV['BALLDONTLIE_API_KEY'] ?? 'c15f166e-08f8-4c3f-b96e-60b9cdd7a2a2';
+    $apiKey = $_ENV['BALLDONTLIE_API_KEY'] ?? '';
+    if (empty($apiKey)) {
+        die("Error: BALLDONTLIE_API_KEY environment variable is not set\n");
+    }
 
     try {
         echo "Attempting to fetch real games from Ball Don't Lie API...\n";

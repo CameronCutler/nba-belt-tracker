@@ -7,24 +7,20 @@ use NbaBelt\Services\BallDontLieClient;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// Allows access to .env
-// $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-// $dotenv->load();
-
+// Load .env file
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
 
 $app = AppFactory::create();
 
+// Add error middleware — display errors in development only
+$debug = ($_ENV['APP_DEBUG'] ?? 'false') === 'true';
+$app->addErrorMiddleware($debug, true, true);
 
-// Add error middleware
-// TODO turn off first true in production
-$app->addErrorMiddleware(true, true, true);
-
-
-// Pull in ENV value and initialise client class
-// $apiKey = $_ENV['BALLDONTLIE_API_KEY'] ?? '';
-$apiKey = 'c15f166e-08f8-4c3f-b96e-60b9cdd7a2a2';
+// Pull API key from environment
+$apiKey = $_ENV['BALLDONTLIE_API_KEY'] ?? '';
 if (empty($apiKey)) {
-	die('Error: API Key not valid');
+	die('Error: BALLDONTLIE_API_KEY environment variable is not set');
 }
 $ballDontLie = new BallDontLieClient($apiKey);
 
