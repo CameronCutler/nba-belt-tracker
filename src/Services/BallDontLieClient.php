@@ -163,26 +163,18 @@ class BallDontLieClient
 	}
 
 	/**
-	 * Get current season year
+	 * Get all games for a specific NBA season
 	 *
-	 * @return int Current season start year
+	 * @param int $seasonYear The starting year of the season (e.g., 2025 for 2025-2026)
+	 * @return array
+	 * @throws Exception
 	 */
-	public function getCurrentSeasonYear(): int
+	public function getGamesForSeason(int $seasonYear): array
 	{
-		$currentMonth = (int) date('n');
-		$currentYear = (int) date('Y');
+		$startDate = "{$seasonYear}-10-01";
+		$endDate = date('Y-m-d'); // Current date, or could calculate season end
 
-		// NBA season starts in October (10th month)
-		// Off Season is July - September (7-9)
-
-		if ($currentMonth >= 10) {
-			return $currentYear;
-		} else  {
-			// off season OR early months (Jan - June)
-			// return the previous year
-			return $currentYear - 1;
-		}
+		return $this->getGames($startDate, $endDate, 100);
 	}
-
 
 } // class end
