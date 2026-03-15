@@ -3,6 +3,7 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use NbaBelt\Http\JsonResponse;
+use NbaBelt\Repositories\GameRepository;
 
 // This file returns a function that registers routes
 return function ($app, $ballDontLie) {
@@ -24,6 +25,17 @@ return function ($app, $ballDontLie) {
 			return JsonResponse::success($response, $games);
 		} catch (Exception $e) {
 			return JsonResponse::error($response, 'Failed to fetch games for today: ' . $e->getMessage());
+		}
+	});
+
+// GET Belt games for current season
+	$app->get('/api/games/belt', function (Request $request, Response $response) {
+		try {
+			$gameRepo = new GameRepository();
+			$beltGames = $gameRepo->getCurrentSeasonBeltGames();
+			return JsonResponse::success($response, $beltGames);
+		} catch (Exception $e) {
+			return JsonResponse::error($response, 'Failed to fetch belt games: ' . $e->getMessage());
 		}
 	});
 

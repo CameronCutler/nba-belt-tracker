@@ -41,5 +41,8 @@
 <div class="endpoint">
 	GET <a href="/api/games/2025-12-10">/api/games/2025-12-10</a> - Get game stats from a specific date (YYYY-mm-dd) (EX. 2025-12-10)
 </div>
+<div class="endpoint">
+	GET <a href="/api/games/belt">/api/games/belt</a> - Get all belt games for the current season
+</div>
 </body>
 </html>
