@@ -64,24 +64,6 @@ return function ($app, $ballDontLie) {
 		}
 	});
 
-// POST endpoint to manually seed games (for testing)
-	$app->post('/api/admin/seed-games', function (Request $request, Response $response) {
-		try {
-// Run the unified setup script (migrations + seeding)
-		$cmdOutput = shell_exec("cd /var/www && php database/setup.php 2>&1");
-		$output = [
-			[ 'script' => 'database/setup.php', 'output' => $cmdOutput ]
-		];
-			
-			return JsonResponse::success($response, [
-				'message' => 'Seeding completed',
-				'results' => $output
-			]);
-		} catch (Exception $e) {
-			return JsonResponse::error($response, 'Failed to seed: ' . $e->getMessage());
-		}
-	});
-
 // GET Games from a given date
 	$app->get('/api/games/{date}', function (Request $request, Response $response, array $args) use ($ballDontLie) {
 		$date = $args['date'];

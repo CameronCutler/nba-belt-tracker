@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 require_once __DIR__ . '/common.php';
 
@@ -9,8 +10,6 @@ require_once __DIR__ . '/common.php';
  * environments. It runs the existing database setup scripts and reports their
  * status.
  */
-
-declare(strict_types=1);
 
 $scripts = [
     'migrate.php',
