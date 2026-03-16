@@ -7,9 +7,9 @@ use NbaBelt\Services\BallDontLieClient;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// Load .env file
+// Load .env file if present (skipped in production where env vars are injected directly)
 $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();
+$dotenv->safeLoad();
 
 $app = AppFactory::create();
 
