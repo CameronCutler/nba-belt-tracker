@@ -39,9 +39,9 @@ RUN composer install --no-dev --optimize-autoloader
 
 RUN update-ca-certificates
 
-# Remove all default nginx configs and install ours as the only one
+# Replace nginx config entirely
 RUN rm -rf /etc/nginx/conf.d/* /etc/nginx/sites-enabled/* /etc/nginx/sites-available/* /var/www/html
-COPY nginx.conf /etc/nginx/conf.d/app.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy supervisord config
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
