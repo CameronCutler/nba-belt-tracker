@@ -17,7 +17,7 @@ try {
     // Hardcoded champion data - OKC Thunder won 2024-2025 NBA Finals
     $championData = [
         'team_id' => 21, // OKC Thunder ID
-        'acquired_date' => '2025-06-17', // NBA Finals date
+        'acquired_date' => '2025-10-01', // Start of 2025-26 season
         'notes' => '2024-2025 NBA Champion - Initial belt holder'
     ];
 

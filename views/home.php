@@ -66,13 +66,25 @@
             color: #9ca3af;
             font-size: 0.9rem;
         }
-        .holder-card .holder-defenses {
-            background: rgba(245, 158, 11, 0.15);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 8px;
-            padding: 8px 20px;
+        .stat-pill {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            border-radius: 10px;
+            padding: 10px 16px;
+            min-width: 80px;
+        }
+        .stat-pill .stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
             color: #fbbf24;
-            font-weight: 700;
+            line-height: 1;
+        }
+        .stat-pill .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #9ca3af;
+            margin-top: 4px;
         }
     </style>
 </head>
@@ -83,7 +95,7 @@
         <img src="/img/nba_larryO_belt.png" alt="Championship Belt" class="img-fluid mb-4" style="max-height: 180px;">
         <h1 class="display-5 fw-bold mb-4">NBA Championship Belt Tracker</h1>
         <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-8 col-lg-5">
                 <div id="belt-holder-section" class="holder-card p-4">
                     <div class="holder-since">Loading belt holder...</div>
                 </div>
@@ -116,14 +128,26 @@ async function loadBeltHolder() {
             return;
         }
         const abbr = data.abbreviation?.toLowerCase() ?? data.team_name?.toLowerCase() ?? '';
-        const defenses = data.defense_count ?? 0;
         section.innerHTML = `
             <div class="crown mb-2">🏆</div>
             <div class="holder-label mb-2">Current Belt Holder</div>
             ${teamLogo(abbr, 150)}
             <div class="holder-team-name mt-2">${data.full_name}</div>
-            <div class="holder-meta mt-1">Since ${formatDate(data.acquired_date)}</div>
-            <div class="holder-defenses mt-3">${defenses} Defense${defenses !== 1 ? 's' : ''}</div>
+            <div class="holder-meta mt-1 mb-4">Since ${formatDate(data.acquired_date)}</div>
+            <div class="d-flex justify-content-center gap-3">
+                <div class="stat-pill text-center">
+                    <div class="stat-value">${data.days_held ?? 0}</div>
+                    <div class="stat-label">Days</div>
+                </div>
+                <div class="stat-pill text-center">
+                    <div class="stat-value">${data.season_defenses ?? 0}</div>
+                    <div class="stat-label">Defenses</div>
+                </div>
+                <div class="stat-pill text-center">
+                    <div class="stat-value">${data.season_reigns ?? 1}</div>
+                    <div class="stat-label">Reigns</div>
+                </div>
+            </div>
         `;
     } catch (e) {
         section.innerHTML = '<span class="holder-since">Could not load belt holder</span>';

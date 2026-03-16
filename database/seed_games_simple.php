@@ -207,6 +207,14 @@ function processApiGames(array $apiGames, int $season): array
  */
 function handleBeltTransfer(array $game, PDO $pdo): bool
 {
+    // Skip if this game has already been processed into belt_history
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM belt_history WHERE game_id = ?");
+    $stmt->execute([$game['id']]);
+    if ((int) $stmt->fetchColumn() > 0) {
+        echo "  Already processed game #{$game['id']}, skipping.\n";
+        return false;
+    }
+
     // Get current belt holder
     $stmt = $pdo->query("SELECT * FROM belt_history WHERE lost_date IS NULL ORDER BY acquired_date DESC LIMIT 1");
     $currentHolder = $stmt->fetch() ?: null;
@@ -215,10 +223,8 @@ function handleBeltTransfer(array $game, PDO $pdo): bool
         // Initial belt assignment - no previous holder
         echo "  Initial belt assignment to winner: " . getTeamName($game['winner_team_id']) . "\n";
 
-        // Insert new belt holder record
         $insertSql = "INSERT INTO belt_history (team_id, acquired_date, game_id, notes) VALUES (?, ?, ?, ?)";
-        $insertStmt = $pdo->prepare($insertSql);
-        $insertStmt->execute([
+        $pdo->prepare($insertSql)->execute([
             $game['winner_team_id'],
             $game['game_date'],
             $game['id'],
@@ -240,7 +246,9 @@ function handleBeltTransfer(array $game, PDO $pdo): bool
     }
 
     if ($gameWinnerId == $currentHolderId) {
-        echo "  Belt holder " . getTeamName($currentHolderId) . " defended the belt!\n";
+        $updateSql = "UPDATE belt_history SET defense_count = defense_count + 1 WHERE id = ?";
+        $pdo->prepare($updateSql)->execute([$currentHolder['id']]);
+        echo "  Belt holder " . getTeamName($currentHolderId) . " defended the belt! (defense #" . ($currentHolder['defense_count'] + 1) . ")\n";
         return false;
     }
 

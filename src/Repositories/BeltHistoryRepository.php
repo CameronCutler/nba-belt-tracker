@@ -29,8 +29,45 @@ class BeltHistoryRepository
                 ORDER BY bh.acquired_date DESC
                 LIMIT 1";
         $stmt = $this->db->query($sql);
-        $result = $stmt->fetch();
-        return $result ?: null;
+        $holder = $stmt->fetch();
+
+        if (!$holder) return null;
+
+        $teamId = (int) $holder['team_id'];
+        $seasonStart = $this->getSeasonStart();
+
+        // How many times this team has held the belt this season
+        $stmt = $this->db->prepare(
+            "SELECT COUNT(*) FROM belt_history WHERE team_id = ? AND acquired_date >= ?"
+        );
+        $stmt->execute([$teamId, $seasonStart]);
+        $holder['season_reigns'] = (int) $stmt->fetchColumn();
+
+        // Total defenses across all reigns this season
+        $stmt = $this->db->prepare(
+            "SELECT COALESCE(SUM(defense_count), 0) FROM belt_history WHERE team_id = ? AND acquired_date >= ?"
+        );
+        $stmt->execute([$teamId, $seasonStart]);
+        $holder['season_defenses'] = (int) $stmt->fetchColumn();
+
+        // Total days holding the belt this season (across all reigns)
+        $stmt = $this->db->prepare("
+            SELECT CAST(SUM(JULIANDAY(COALESCE(lost_date, DATE('now'))) - JULIANDAY(acquired_date)) AS INTEGER)
+            FROM belt_history
+            WHERE team_id = ? AND acquired_date >= ?
+        ");
+        $stmt->execute([$teamId, $seasonStart]);
+        $holder['days_held'] = (int) $stmt->fetchColumn();
+
+        return $holder;
+    }
+
+    private function getSeasonStart(): string
+    {
+        $month = (int) date('n');
+        $year  = (int) date('Y');
+        $seasonYear = $month >= 10 ? $year : $year - 1;
+        return "{$seasonYear}-10-01";
     }
 
     /**
