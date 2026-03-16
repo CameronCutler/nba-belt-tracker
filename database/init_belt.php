@@ -21,10 +21,16 @@ try {
         'notes' => '2024-2025 NBA Champion - Initial belt holder'
     ];
 
+    // Only initialize if belt_history is empty — skips on subsequent deploys
+    $existing = $pdo->query("SELECT COUNT(*) FROM belt_history")->fetchColumn();
+    if ($existing > 0) {
+        echo "Belt history already initialized ({$existing} records found), skipping.\n";
+        return;
+    }
+
     echo "Initializing belt history with OKC Thunder (2024-2025 champions)...\n";
 
-    // Insert directly into database
-    $sql = "INSERT OR REPLACE INTO belt_history (id, team_id, acquired_date, notes) VALUES (1, ?, ?, ?)";
+    $sql = "INSERT INTO belt_history (team_id, acquired_date, notes) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $result = $stmt->execute([
         $championData['team_id'],
