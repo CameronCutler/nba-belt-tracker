@@ -69,6 +69,32 @@ class GameRepository
     }
 
     /**
+     * Get all games on a specific date, joined with team info.
+     *
+     * @param string $date YYYY-MM-DD
+     * @return array
+     */
+    public function getGamesByDate(string $date): array
+    {
+        $sql = "SELECT
+                    g.id, g.game_date, g.home_score, g.away_score,
+                    g.season, g.belt_involved, g.winner_team_id,
+                    ht.id AS home_team_id, ht.full_name AS home_team_name, ht.abbreviation AS home_team_abbr,
+                    at.id AS away_team_id, at.full_name AS away_team_name, at.abbreviation AS away_team_abbr,
+                    wt.full_name AS winner_team_name
+                FROM games g
+                JOIN teams ht ON g.home_team_id = ht.id
+                JOIN teams at ON g.away_team_id = at.id
+                LEFT JOIN teams wt ON g.winner_team_id = wt.id
+                WHERE g.game_date = ?
+                ORDER BY g.id ASC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$date]);
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Create a new game
      *
      * @param array $data Game data

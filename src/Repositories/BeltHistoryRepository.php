@@ -52,4 +52,30 @@ class BeltHistoryRepository
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll();
     }
+
+    /**
+     * Enrich an array of API games with belt context.
+     * Adds `belt_on_the_line` (bool) and `belt_holder_team_id` (int|null) to each game.
+     *
+     * @param array $games Games from the Ball Don't Lie API
+     * @return array
+     */
+    public function enrichGamesWithBeltContext(array $games): array
+    {
+        $holder = $this->getCurrentBeltHolder();
+        $holderTeamId = $holder ? (int) $holder['team_id'] : null;
+
+        return array_map(function (array $game) use ($holderTeamId) {
+            $homeId = (int) ($game['home_team']['id'] ?? 0);
+            $awayId = (int) ($game['visitor_team']['id'] ?? 0);
+
+            $beltOnTheLine = $holderTeamId !== null
+                && ($homeId === $holderTeamId || $awayId === $holderTeamId);
+
+            $game['belt_on_the_line'] = $beltOnTheLine;
+            $game['belt_holder_team_id'] = $holderTeamId;
+
+            return $game;
+        }, $games);
+    }
 }

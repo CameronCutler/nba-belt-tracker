@@ -3,11 +3,25 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use NbaBelt\Http\JsonResponse;
+use NbaBelt\Repositories\BeltHistoryRepository;
 use NbaBelt\Repositories\GameRepository;
 
 // This file returns a function that registers routes
 return function ($app, $ballDontLie) {
-	// GET Active Teams
+	// GET Current belt holder
+	$app->get('/api/belt/holder', function (Request $request, Response $response) {
+		try {
+			$holder = (new BeltHistoryRepository())->getCurrentBeltHolder();
+			if (!$holder) {
+				return JsonResponse::notFound($response, 'No belt holder found');
+			}
+			return JsonResponse::success($response, $holder);
+		} catch (Exception $e) {
+			return JsonResponse::error($response, 'Failed to fetch belt holder: ' . $e->getMessage());
+		}
+	});
+
+// GET Active Teams
 	$app->get('/api/teams', function(Request $request, Response $response) use ($ballDontLie) {
 		try {
 			$teams = $ballDontLie->getActiveTeams();
@@ -17,12 +31,14 @@ return function ($app, $ballDontLie) {
 		}
 	});
 
-// GET Games from today
+// GET Games from today (live from BDL API, enriched with belt context)
 	$app->get('/api/games/today', function (Request $request, Response $response) use ($ballDontLie) {
 		try {
 			$today = date('Y-m-d');
-			$games = $ballDontLie->getGamesByDate($today);
-			return JsonResponse::success($response, $games);
+			$result = $ballDontLie->getGamesByDate($today);
+			$beltRepo = new BeltHistoryRepository();
+			$result['data'] = $beltRepo->enrichGamesWithBeltContext($result['data'] ?? []);
+			return JsonResponse::success($response, $result);
 		} catch (Exception $e) {
 			return JsonResponse::error($response, 'Failed to fetch games for today: ' . $e->getMessage());
 		}
@@ -43,7 +59,7 @@ return function ($app, $ballDontLie) {
 				$allGamesCount = count($allGames);
 
 				// Check belt history
-				$beltRepo = new NbaBelt\Repositories\BeltHistoryRepository();
+				$beltRepo = new BeltHistoryRepository();
 				$currentHolder = $beltRepo->getCurrentBeltHolder();
 
 
@@ -65,7 +81,7 @@ return function ($app, $ballDontLie) {
 	});
 
 // GET Games from a given date
-	$app->get('/api/games/{date}', function (Request $request, Response $response, array $args) use ($ballDontLie) {
+	$app->get('/api/games/{date}', function (Request $request, Response $response, array $args) {
 		$date = $args['date'];
 		try {
 			if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
@@ -76,7 +92,7 @@ return function ($app, $ballDontLie) {
 				return JsonResponse::badRequest($response, 'Invalid Date. Please provide a valid calendar date');
 			}
 
-			$games = $ballDontLie->getGamesByDate($date);
+			$games = (new GameRepository())->getGamesByDate($date);
 			return JsonResponse::success($response, $games);
 		} catch (Exception $e) {
 			return JsonResponse::error($response, 'Failed to fetch games from ' . $date . ': ' . $e->getMessage());
