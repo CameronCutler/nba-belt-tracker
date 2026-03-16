@@ -1,7 +1,7 @@
 FROM php:8.2-fpm
 
 # Install system dependencies
-RUN apt-get update && apt-get install  -y \
+RUN apt-get update && apt-get install -y \
     git \
     curl \
     libcurl4-openssl-dev \
@@ -11,7 +11,10 @@ RUN apt-get update && apt-get install  -y \
     zip \
     unzip \
     sqlite3 \
-    libsqlite3-dev
+    libsqlite3-dev \
+    nginx \
+    supervisor \
+    ca-certificates
 
 # Clear cache \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -34,16 +37,21 @@ RUN chown -R www-data:www-data /var/www
 # Install PHP deps
 RUN composer install --no-dev --optimize-autoloader
 
-# Add Certificate for cURL
-RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+RUN update-ca-certificates
+
+# Copy nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN rm -f /etc/nginx/sites-enabled/default
+
+# Copy supervisord config
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Create database directory and set permissions
 RUN mkdir -p /var/www/database && chown -R www-data:www-data /var/www/database
 
-# Entrypoint runs db setup at container start (needs API key from env)
+# Entrypoint runs db setup then starts supervisord
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN sed -i 's/\r//' /entrypoint.sh && chmod +x /entrypoint.sh
 
-# Expose port 9000
-EXPOSE 9000
+EXPOSE 80
 ENTRYPOINT ["/entrypoint.sh"]
