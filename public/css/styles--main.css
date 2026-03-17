@@ -1,0 +1,81 @@
+body { background: #0f1117; color: #e5e7eb; }
+
+.hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-bottom: 1px solid #1e3a5f;
+}
+.hero img { filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5)); }
+.holder-name { color: #fbbf24; }
+.holder-since { color: #9ca3af; font-size: 0.9rem; }
+
+.games-section { background: #0f1117; }
+
+.game-card {
+    background: #1c1f2e;
+    border: 1px solid #2d3148;
+    border-radius: 12px;
+    transition: transform 0.15s ease;
+}
+.game-card:hover { transform: translateY(-2px); }
+.game-card.belt-game {
+    border-color: #f59e0b;
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+}
+.belt-badge {
+    background: #f59e0b;
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+.team-abbr { font-size: 1.4rem; font-weight: 700; }
+.game-status { color: #6b7280; font-size: 0.85rem; }
+.vs { color: #4b5563; }
+.score { font-size: 1.1rem; font-weight: 600; color: #e5e7eb; }
+
+.holder-card {
+    background: linear-gradient(135deg, #1a1200 0%, #2d1f00 50%, #1a1200 100%);
+    border: 2px solid #f59e0b;
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.3), 0 0 80px rgba(245, 158, 11, 0.1);
+}
+.holder-card .crown { font-size: 2.5rem; line-height: 1; }
+.holder-card .holder-label {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.75rem;
+    color: #f59e0b;
+    font-weight: 700;
+}
+.holder-card .holder-team-name {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+}
+.holder-card .holder-meta {
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+.stat-pill {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 10px;
+    padding: 10px 16px;
+    min-width: 80px;
+}
+.stat-pill .stat-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fbbf24;
+    line-height: 1;
+}
+.stat-pill .stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9ca3af;
+    margin-top: 4px;
+}
