@@ -34,7 +34,7 @@ return function ($app, $ballDontLie) {
 // GET Games from today (live from BDL API, enriched with belt context)
 	$app->get('/api/games/today', function (Request $request, Response $response) use ($ballDontLie) {
 		try {
-			$today = date('Y-m-d');
+			$today = (new \DateTime('now', new \DateTimeZone('America/Los_Angeles')))->format('Y-m-d');
 			$result = $ballDontLie->getGamesByDate($today);
 			$beltRepo = new BeltHistoryRepository();
 			$result['data'] = $beltRepo->enrichGamesWithBeltContext($result['data'] ?? []);

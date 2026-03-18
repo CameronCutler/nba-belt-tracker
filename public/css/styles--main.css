@@ -4,7 +4,7 @@ body { background: #0f1117; color: #e5e7eb; }
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     border-bottom: 1px solid #1e3a5f;
 }
-.hero img { filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5)); }
+.hero > .container > img { filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5)); }
 .holder-name { color: #fbbf24; }
 .holder-since { color: #9ca3af; font-size: 0.9rem; }
 
@@ -30,10 +30,16 @@ body { background: #0f1117; color: #e5e7eb; }
     padding: 2px 8px;
     border-radius: 999px;
 }
+.team-logo { width: 48px; height: 48px; object-fit: contain; }
+.team-logo--large { width: 150px; height: 150px; object-fit: contain; }
 .team-abbr { font-size: 1.4rem; font-weight: 700; }
 .game-status { color: #6b7280; font-size: 0.85rem; }
 .vs { color: #4b5563; }
-.score { font-size: 1.1rem; font-weight: 600; color: #e5e7eb; }
+.score { font-size: 1.4rem; font-weight: 700; color: #e5e7eb; }
+.score--winner { color: #ffffff; }
+.score-dash { color: #4b5563; font-weight: 300; }
+.game-card--live { border-color: #22c55e; }
+.game-card--live .game-status { color: #22c55e; font-weight: 600; }
 
 .holder-card {
     background: linear-gradient(135deg, #1a1200 0%, #2d1f00 50%, #1a1200 100%);

@@ -48,7 +48,7 @@ try {
             echo "No existing games found; fetching full season starting {$startDate}\n";
         }
 
-        $endDate = date('Y-m-d');
+        $endDate = (new \DateTime('now', new \DateTimeZone('America/Los_Angeles')))->format('Y-m-d');
 
         $apiGames = [];
         $cursor = null;
@@ -167,8 +167,8 @@ function processApiGames(array $apiGames, int $season): array
     $processedGames = [];
 
     foreach ($apiGames as $apiGame) {
-        // Skip games that haven't been played yet or don't have scores
-        if (empty($apiGame['home_team_score']) || empty($apiGame['visitor_team_score'])) {
+        // Skip games that aren't final yet (in-progress games have scores but status != 'Final')
+        if (($apiGame['status'] ?? '') !== 'Final') {
             continue;
         }
 
