@@ -1,0 +1,3 @@
+TZ=America/Los_Angeles
+0 0 * * * root php /var/www/database/seed_games_simple.php >> /dev/stdout 2>&1
+

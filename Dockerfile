@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     nginx \
     supervisor \
-    ca-certificates
+    ca-certificates \
+    cron
 
 # Clear cache \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -48,6 +49,10 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Create database directory and set permissions
 RUN mkdir -p /var/www/database && chown -R www-data:www-data /var/www/database
+
+# Cron job - runs seeder at midnight Pacific time
+COPY crontab /etc/cron.d/nba-belt
+RUN chmod 0644 /etc/cron.d/nba-belt && crontab /etc/cron.d/nba-belt
 
 # Entrypoint runs db setup then starts supervisord
 COPY entrypoint.sh /entrypoint.sh
