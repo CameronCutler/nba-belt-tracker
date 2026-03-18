@@ -100,7 +100,7 @@ function buildGameCard(game) {
   }
 
   return `
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-lg-3">
             <div class="game-card p-4 h-100 text-center ${isBeltGame ? "belt-game" : ""} ${state === "live" ? "game-card--live" : ""}">
                 ${beltBadge}
                 <div class="d-flex justify-content-center align-items-center gap-4">
@@ -129,20 +129,17 @@ function gameState(status, period) {
 
 function formatScheduledTime(status) {
   if (!status || !/^\d{4}-\d{2}-\d{2}T/.test(status)) return status || "TBD";
-  return (
-    new Date(status).toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      timeZone: "America/New_York",
-    }) + " ET"
-  );
+  return new Date(status).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "America/New_York",
+  });
 }
 
 function formatLiveStatus(state, period, time) {
   if (state === "final") return "FINAL";
   if (!period) return "LIVE";
-  // const quarter = period <= 4 ? `Q${period}` : `OT${period > 5 ? period - 4 : ''}`;
-  // return time ? `${quarter} · ${time}` : quarter;
+
   return time;
 }
 

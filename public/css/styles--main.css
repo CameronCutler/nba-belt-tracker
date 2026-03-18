@@ -12,33 +12,33 @@ body { background: #0f1117; color: #e5e7eb; }
 
 .game-card {
     background: #1c1f2e;
-    border: 1px solid #2d3148;
-    border-radius: 12px;
+    border: 2px solid #2d3148;
+    border-radius: 16px;
     transition: transform 0.15s ease;
 }
 .game-card:hover { transform: translateY(-2px); }
 .game-card.belt-game {
-    border-color: #f59e0b;
-    box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+    border: 3px solid #f59e0b;
+    box-shadow: 0 0 24px rgba(245, 158, 11, 0.35);
 }
 .belt-badge {
     background: #f59e0b;
     color: #000;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.05em;
-    padding: 2px 8px;
+    padding: 3px 10px;
     border-radius: 999px;
 }
-.team-logo { width: 48px; height: 48px; object-fit: contain; }
-.team-logo--large { width: 150px; height: 150px; object-fit: contain; }
-.team-abbr { font-size: 1.4rem; font-weight: 700; }
+.team-logo { width: 72px; height: 72px; object-fit: contain; }
+.team-logo--large { width: 160px; height: 160px; object-fit: contain; }
+.team-abbr { font-size: 1.6rem; font-weight: 700; }
 .game-status { color: #6b7280; font-size: 0.85rem; }
 .vs { color: #4b5563; }
-.score { font-size: 1.4rem; font-weight: 700; color: #e5e7eb; }
+.score { font-size: 1.6rem; font-weight: 700; color: #e5e7eb; }
 .score--winner { color: #ffffff; }
 .score-dash { color: #4b5563; font-weight: 300; }
-.game-card--live { border-color: #22c55e; }
+.game-card--live { border-color: #22c55e; border-width: 3px; }
 .game-card--live .game-status { color: #22c55e; font-weight: 600; }
 
 .holder-card {
