@@ -36,8 +36,10 @@ return function ($app, $ballDontLie) {
 		try {
 			$today = (new \DateTime('now', new \DateTimeZone('America/Los_Angeles')))->format('Y-m-d');
 			$result = $ballDontLie->getGamesByDate($today);
-			$beltRepo = new BeltHistoryRepository();
-			$result['data'] = $beltRepo->enrichGamesWithBeltContext($result['data'] ?? []);
+			$games  = $result['data'] ?? [];
+
+			$games = (new BeltHistoryRepository())->enrichGamesWithBeltContext($games);
+			$result['data'] = $games;
 			return JsonResponse::success($response, $result);
 		} catch (Exception $e) {
 			return JsonResponse::error($response, 'Failed to fetch games for today: ' . $e->getMessage());
