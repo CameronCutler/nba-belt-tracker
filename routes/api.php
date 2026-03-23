@@ -21,6 +21,16 @@ return function ($app, $ballDontLie) {
 		}
 	});
 
+// GET Belt history
+	$app->get('/api/belt/history', function (Request $request, Response $response) {
+		try {
+			$history = (new BeltHistoryRepository())->getBeltHistory(null);
+			return JsonResponse::success($response, $history);
+		} catch (Exception $e) {
+			return JsonResponse::error($response, 'Failed to fetch belt history: ' . $e->getMessage());
+		}
+	});
+
 // GET Active Teams
 	$app->get('/api/teams', function(Request $request, Response $response) use ($ballDontLie) {
 		try {

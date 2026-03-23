@@ -84,3 +84,154 @@ body { background: #0f1117; color: #e5e7eb; }
     color: #9ca3af;
     margin-top: 4px;
 }
+
+.belt-timeline-vertical {
+    position: relative;
+    padding: 1rem 0;
+}
+.belt-timeline-vertical::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #2d3148;
+    transform: translateX(-50%);
+}
+
+.vtl-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    position: relative;
+}
+.vtl-item--left {
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.vtl-item--right {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.vtl-card {
+    width: calc(50% - 2rem);
+    background: #1c1f2e;
+    border: 2px solid #2d3148;
+    border-radius: 12px;
+    padding: 10px 14px;
+    text-align: center;
+}
+.vtl-item--left .vtl-card  { margin-right: auto; }
+.vtl-item--right .vtl-card { margin-left: auto; }
+
+.vtl-card--current {
+    border-color: #f59e0b;
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+}
+
+.vtl-dot {
+    width: 14px;
+    height: 14px;
+    background: #4b5563;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    flex-shrink: 0;
+}
+.vtl-dot--current {
+    background: #f59e0b;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+}
+
+.timeline-abbr {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #e5e7eb;
+    margin-top: 6px;
+}
+.timeline-date {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-top: 2px;
+}
+.timeline-defenses {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+.timeline-current-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #f59e0b;
+    margin-top: 4px;
+}
+
+/* ── Mobile responsive ─────────────────────────────────────── */
+@media (max-width: 575px) {
+    .hero {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+    .hero > .container > img {
+        max-height: 120px !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .holder-card {
+        padding: 1.25rem !important;
+    }
+    .holder-card .holder-team-name {
+        font-size: 1.4rem;
+    }
+    .holder-card .crown {
+        font-size: 1.8rem;
+    }
+    .team-logo--large {
+        width: 100px;
+        height: 100px;
+    }
+    .stat-pill {
+        min-width: 64px;
+        padding: 8px 10px;
+    }
+    .stat-pill .stat-value {
+        font-size: 1.2rem;
+    }
+
+    .team-logo {
+        width: 52px;
+        height: 52px;
+    }
+    .team-abbr {
+        font-size: 1.1rem;
+    }
+    .score {
+        font-size: 1.2rem;
+    }
+
+    .belt-timeline-vertical::before { left: 16px; transform: none; }
+    .vtl-item--left,
+    .vtl-item--right {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding-left: 40px;
+    }
+    .vtl-card {
+        width: 100%;
+    }
+    .vtl-item--left .vtl-card,
+    .vtl-item--right .vtl-card {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .vtl-dot { left: 16px; transform: none; }
+}

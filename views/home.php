@@ -34,6 +34,11 @@
     </div>
 </div>
 
+<div class="container py-5">
+    <h2 class="fw-semibold mb-4" style="color:#e5e7eb;">Belt History 25'- 26'</h2>
+    <div id="belt-history" class="text-secondary">Loading history...</div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="/js/app.js"></script>
 

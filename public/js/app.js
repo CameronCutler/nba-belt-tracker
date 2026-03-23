@@ -76,7 +76,7 @@ function buildGameCard(game) {
   const homeAbbr = game.home_team?.abbreviation ?? "";
   const awayAbbr = game.visitor_team?.abbreviation ?? "";
   const status = game.status ?? "";
-  const state = gameState(status, game.period);
+  const state = gameState(status);
 
   const beltBadge = isBeltGame
     ? `<div class="mb-2"><span class="belt-badge">🏆 BELT ON THE LINE</span></div>`
@@ -120,7 +120,7 @@ function buildGameCard(game) {
     `;
 }
 
-function gameState(status, period) {
+function gameState(status) {
   if (!status) return "scheduled";
   if (/^\d{4}-\d{2}-\d{2}T/.test(status)) return "scheduled";
   if (status === "Final") return "final";
@@ -154,5 +154,46 @@ function formatDate(dateStr) {
   });
 }
 
+async function loadBeltHistory() {
+    const container = document.getElementById('belt-history');
+    try {
+        const res = await fetch('/api/belt/history');
+        const data = await res.json();
+        if (!data.length) {
+            container.innerHTML = '<p>No history yet.</p>';
+            return;
+        }
+
+        // Reverse so oldest is first (left to right)
+        const history = [...data].reverse();
+
+        container.innerHTML = `
+            <div class="belt-timeline-vertical">
+                ${history.map((entry, i) => {
+                    const isCurrent = !entry.lost_date;
+                    const abbr = entry.team_name?.toLowerCase() ?? '';
+                    const defenses = entry.defense_count ?? 0;
+                    const side = i % 2 === 0 ? 'left' : 'right';
+                    return `
+                        <div class="vtl-item vtl-item--${side}">
+                            <div class="vtl-card ${isCurrent ? 'vtl-card--current' : ''}">
+                                ${teamLogo(abbr)}
+                                <div class="timeline-abbr">${entry.team_name}</div>
+                                <div class="timeline-date">${formatDate(entry.acquired_date)}</div>
+                                <div class="timeline-defenses">${defenses} defense${defenses !== 1 ? 's' : ''}</div>
+                                ${isCurrent ? '<div class="timeline-current-badge">Current</div>' : ''}
+                            </div>
+                            <div class="vtl-dot ${isCurrent ? 'vtl-dot--current' : ''}"></div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+    } catch (e) {
+        container.innerHTML = '<p class="text-danger">Failed to load belt history.</p>';
+    }
+}
+
 loadBeltHolder();
 loadTodaysGames();
+loadBeltHistory();
