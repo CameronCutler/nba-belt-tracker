@@ -123,13 +123,6 @@ try {
     foreach ($games as $game) {
         // Determine if this game involves the current belt holder
         $currentHolder = getCurrentBeltHolderAtDate($pdo, $game['game_date']);
-        if ($currentHolder) {
-            $game['belt_involved'] = ($game['home_team_id'] == $currentHolder['team_id'] || $game['away_team_id'] == $currentHolder['team_id']) ? 1 : 0;
-            echo "  Belt holder found for {$game['game_date']}: Team {$currentHolder['team_id']} - Belt involved: {$game['belt_involved']}\n";
-        } else {
-            $game['belt_involved'] = 1; // First belt game - assign initial holder
-            echo "  No belt holder yet for {$game['game_date']} - this will be the first belt game\n";
-        }
 
         // Insert the game
         $gameRepository->create($game);
@@ -306,11 +299,6 @@ function getCurrentBeltHolderAtDate(PDO $pdo, string $date): ?array
     $stmt->execute([$date, $date]);
     $result = $stmt->fetch();
 
-    if ($result) {
-        echo "    Found belt holder for date {$date}: Team {$result['team_id']} (acquired {$result['acquired_date']})\n";
-    } else {
-        echo "    No belt holder found for date {$date}\n";
-    }
 
     return $result === false ? null : $result;
 }
