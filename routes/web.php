@@ -13,10 +13,4 @@ return function ($app) {
 		$response->getBody()->write($html);
 		return $response->withHeader('Content-Type', 'text/html');
 	});
-
-	// GET Health Check
-	$app->get('/health-check', function (Request $request, Response $response, $args) {
-		$response->getBody()->write("Hello World! The NBA Belt Tracker is running...");
-		return $response;
-	});
 };
