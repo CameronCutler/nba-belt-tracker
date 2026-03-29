@@ -143,7 +143,6 @@ function formatLiveStatus(state, period, time) {
   return time;
 }
 
-
 function formatDate(dateStr) {
   if (!dateStr) return "";
   const [y, m, d] = dateStr.split("-");
@@ -155,43 +154,48 @@ function formatDate(dateStr) {
 }
 
 async function loadBeltHistory() {
-    const container = document.getElementById('belt-history');
-    try {
-        const res = await fetch('/api/belt/history');
-        const data = await res.json();
-        if (!data.length) {
-            container.innerHTML = '<p>No history yet.</p>';
-            return;
-        }
+  const container = document.getElementById("belt-history");
+  try {
+    const res = await fetch("/api/belt/history");
+    const data = await res.json();
+    if (!data.length) {
+      container.innerHTML = "<p>No history yet.</p>";
+      return;
+    }
 
-        // Reverse so oldest is first (left to right)
-        const history = [...data].reverse();
+    // Reverse so oldest is first (left to right)
+    const history = [...data].reverse();
 
-        container.innerHTML = `
+    container.innerHTML = `
             <div class="belt-timeline-vertical">
-                ${history.map((entry, i) => {
+                ${history
+                  .map((entry, i) => {
                     const isCurrent = !entry.lost_date;
-                    const abbr = entry.team_name?.toLowerCase() ?? '';
+                    const abbr = entry.team_name?.toLowerCase() ?? "";
                     const defenses = entry.defense_count ?? 0;
-                    const side = i % 2 === 0 ? 'left' : 'right';
+                    const days = entry.days_held ?? 0;
+                    const side = i % 2 === 0 ? "left" : "right";
                     return `
                         <div class="vtl-item vtl-item--${side}">
-                            <div class="vtl-card ${isCurrent ? 'vtl-card--current' : ''}">
+                            <div class="vtl-card ${isCurrent ? "vtl-card--current" : ""}">
                                 ${teamLogo(abbr)}
                                 <div class="timeline-abbr">${entry.team_name}</div>
                                 <div class="timeline-date">${formatDate(entry.acquired_date)}</div>
-                                <div class="timeline-defenses">${defenses} defense${defenses !== 1 ? 's' : ''}</div>
-                                ${isCurrent ? '<div class="timeline-current-badge">Current</div>' : ''}
+                                <div class="timeline-defenses">${days} day${days !== 1 ? "s" : ""}</div>
+                                <div class="timeline-defenses">${defenses} defense${defenses !== 1 ? "s" : ""}</div>
+                                ${isCurrent ? '<div class="timeline-current-badge">Current</div>' : ""}
                             </div>
-                            <div class="vtl-dot ${isCurrent ? 'vtl-dot--current' : ''}"></div>
+                            <div class="vtl-dot ${isCurrent ? "vtl-dot--current" : ""}"></div>
                         </div>
                     `;
-                }).join('')}
+                  })
+                  .join("")}
             </div>
         `;
-    } catch (e) {
-        container.innerHTML = '<p class="text-danger">Failed to load belt history.</p>';
-    }
+  } catch (e) {
+    container.innerHTML =
+      '<p class="text-danger">Failed to load belt history.</p>';
+  }
 }
 
 loadBeltHolder();

@@ -22,7 +22,8 @@ class BeltHistoryRepository
      */
     public function getCurrentBeltHolder(): ?array
     {
-        $sql = "SELECT bh.*, t.full_name, t.abbreviation AS team_name
+        $sql = "SELECT bh.*, t.full_name, t.abbreviation AS team_name,
+                    CAST(JULIANDAY(DATE('now')) - JULIANDAY(bh.acquired_date) AS INTEGER) AS days_held
                 FROM belt_history bh
                 JOIN teams t ON bh.team_id = t.id
                 WHERE bh.lost_date IS NULL
@@ -50,15 +51,6 @@ class BeltHistoryRepository
         $stmt->execute([$teamId, $seasonStart]);
         $holder['season_defenses'] = (int) $stmt->fetchColumn();
 
-        // Total days holding the belt this season (across all reigns)
-        $stmt = $this->db->prepare("
-            SELECT CAST(SUM(JULIANDAY(COALESCE(lost_date, DATE('now'))) - JULIANDAY(acquired_date)) AS INTEGER)
-            FROM belt_history
-            WHERE team_id = ? AND acquired_date >= ?
-        ");
-        $stmt->execute([$teamId, $seasonStart]);
-        $holder['days_held'] = (int) $stmt->fetchColumn();
-
         return $holder;
     }
 
@@ -77,7 +69,8 @@ class BeltHistoryRepository
      */
     public function getBeltHistory(?string $limit): ?array
     {
-        $sql = "SELECT bh.*, t.full_name, t.abbreviation AS team_name
+        $sql = "SELECT bh.*, t.full_name, t.abbreviation AS team_name,
+                    CAST(JULIANDAY(COALESCE(bh.lost_date, DATE('now'))) - JULIANDAY(bh.acquired_date) AS INTEGER) AS days_held
                 FROM belt_history bh
                 JOIN teams t ON bh.team_id = t.id
                 ORDER BY bh.acquired_date DESC";
