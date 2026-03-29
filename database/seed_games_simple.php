@@ -123,6 +123,12 @@ try {
     foreach ($games as $game) {
         // Determine if this game involves the current belt holder
         $currentHolder = getCurrentBeltHolderAtDate($pdo, $game['game_date']);
+        if ($currentHolder) {
+            $holderId = (int) $currentHolder['team_id'];
+            if ($game['home_team_id'] == $holderId || $game['away_team_id'] == $holderId) {
+                $game['belt_involved'] = 1;
+            }
+        }
 
         // Insert the game
         $gameRepository->create($game);
