@@ -8,7 +8,13 @@ use NbaBelt\Repositories\GameRepository;
 
 // This file returns a function that registers routes
 return function ($app, $ballDontLie) {
-	// GET Current belt holder
+	// Health check
+	$app->get('/health-check', function (Request $request, Response $response) {
+		$response->getBody()->write('ok');
+		return $response->withStatus(200);
+	});
+
+// GET Current belt holder
 	$app->get('/api/belt/holder', function (Request $request, Response $response) {
 		try {
 			$holder = (new BeltHistoryRepository())->getCurrentBeltHolder();
