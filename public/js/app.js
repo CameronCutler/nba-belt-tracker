@@ -198,6 +198,47 @@ async function loadBeltHistory() {
   }
 }
 
+async function loadBeltLeaders() {
+    const container = document.getElementById('belt-leaders');
+    try {
+        const res = await fetch('/api/belt/leaders');
+        const data = await res.json();
+        if (!data.length) {
+            container.innerHTML = '<p class="text-secondary">No data yet.</p>';
+            return;
+        }
+
+        const byDays     = [...data].sort((a, b) => b.total_days - a.total_days).slice(0, 3);
+        const byDefenses = [...data].sort((a, b) => b.total_defenses - a.total_defenses).slice(0, 3);
+        const byReigns   = [...data].sort((a, b) => b.total_reigns - a.total_reigns).slice(0, 3);
+
+        const buildList = (teams, valueKey, label) => `
+            <div class="col-md-4">
+                <div class="leaders-card">
+                    <div class="leaders-title">${label}</div>
+                    ${teams.map((t, i) => `
+                        <div class="leaders-row">
+                            <span class="leaders-rank">${i + 1}</span>
+                            ${teamLogo(t.team_name.toLowerCase())}
+                            <span class="leaders-name">${t.team_name}</span>
+                            <span class="leaders-value">${t[valueKey]}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        container.innerHTML =
+            buildList(byDays,     'total_days',     'Days Held') +
+            buildList(byDefenses, 'total_defenses', 'Defenses') +
+            buildList(byReigns,   'total_reigns',   'Reigns');
+
+    } catch (e) {
+        container.innerHTML = '<p class="text-danger">Failed to load leaders.</p>';
+    }
+}
+
 loadBeltHolder();
 loadTodaysGames();
+loadBeltLeaders();
 loadBeltHistory();

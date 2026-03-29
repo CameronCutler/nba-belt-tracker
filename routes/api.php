@@ -21,6 +21,16 @@ return function ($app, $ballDontLie) {
 		}
 	});
 
+// GET Belt season leaderboard
+	$app->get('/api/belt/leaders', function (Request $request, Response $response) {
+		try {
+			$leaders = (new BeltHistoryRepository())->getBeltLeaders();
+			return JsonResponse::success($response, $leaders);
+		} catch (Exception $e) {
+			return JsonResponse::error($response, 'Failed to fetch belt leaders: ' . $e->getMessage());
+		}
+	});
+
 // GET Belt history
 	$app->get('/api/belt/history', function (Request $request, Response $response) {
 		try {

@@ -84,6 +84,28 @@ class BeltHistoryRepository
     }
 
     /**
+     * Get per-team season stats for the leaderboard.
+     *
+     * @return array  Each row: team_name, full_name, total_reigns, total_defenses, total_days
+     */
+    public function getBeltLeaders(): array
+    {
+        $seasonStart = $this->getSeasonStart();
+        $stmt = $this->db->prepare("
+            SELECT t.abbreviation AS team_name, t.full_name,
+                COUNT(*) AS total_reigns,
+                COALESCE(SUM(bh.defense_count), 0) AS total_defenses,
+                CAST(SUM(JULIANDAY(COALESCE(bh.lost_date, DATE('now'))) - JULIANDAY(bh.acquired_date)) AS INTEGER) AS total_days
+            FROM belt_history bh
+            JOIN teams t ON bh.team_id = t.id
+            WHERE bh.acquired_date >= ?
+            GROUP BY bh.team_id, t.abbreviation, t.full_name
+        ");
+        $stmt->execute([$seasonStart]);
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Enrich an array of API games with belt context.
      * Adds `belt_on_the_line` (bool) and `belt_holder_team_id` (int|null) to each game.
      *
