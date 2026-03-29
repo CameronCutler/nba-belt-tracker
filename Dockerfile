@@ -46,8 +46,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Copy supervisord config
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Create database directory and set permissions
-RUN mkdir -p /var/www/database && chown -R www-data:www-data /var/www/database
+# Create storage directory for the SQLite DB (volume mount target)
+RUN mkdir -p /var/www/storage && chown -R www-data:www-data /var/www/storage
 
 # Entrypoint runs db setup then starts supervisord
 COPY entrypoint.sh /entrypoint.sh
