@@ -36,7 +36,6 @@
 </div>
 
 <div class="container py-5">
-    <h2 class="fw-semibold mb-4" style="color:#e5e7eb;">Season Leaders 25'–26'</h2>
     <h2 class="fw-semibold mb-4" style="color:#e5e7eb;">Belt History 25'–26'</h2>
     <div id="belt-history" class="text-secondary">Loading history...</div>
     <h2 class="fw-semibold mt-5 mb-4" style="color:#e5e7eb;">Season Leaders 25'–26'</h2>
