@@ -22,8 +22,7 @@ class BeltHistoryRepository
      */
     public function getCurrentBeltHolder(): ?array
     {
-        $sql = "SELECT bh.*, t.full_name, t.abbreviation AS team_name,
-                    CAST(JULIANDAY(DATE('now')) - JULIANDAY(bh.acquired_date) AS INTEGER) AS days_held
+        $sql = "SELECT bh.*, t.full_name, t.abbreviation AS team_name
                 FROM belt_history bh
                 JOIN teams t ON bh.team_id = t.id
                 WHERE bh.lost_date IS NULL

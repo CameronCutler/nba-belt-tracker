@@ -1,15 +1,26 @@
 async function loadBeltHolder() {
   const section = document.getElementById("belt-holder-section");
   try {
-    const res = await fetch("/api/belt/holder");
-    const data = await res.json();
-    if (!res.ok) {
+    const [holderRes, leadersRes] = await Promise.all([
+      fetch("/api/belt/holder"),
+      fetch("/api/belt/leaders"),
+    ]);
+    const data = await holderRes.json();
+    const leaders = await leadersRes.json();
+
+    if (!holderRes.ok) {
       section.innerHTML =
         '<span class="holder-meta">Belt holder unknown</span>';
       return;
     }
+
     const abbr =
       data.abbreviation?.toLowerCase() ?? data.team_name?.toLowerCase() ?? "";
+    const leaderEntry = leaders.find(
+      (l) => l.team_name.toLowerCase() === abbr
+    );
+    const totalDays = leaderEntry?.total_days ?? data.days_held ?? 0;
+
     section.innerHTML = `
             <div class="crown mb-2">🏆</div>
             <div class="holder-label mb-2">Current Belt Holder</div>
@@ -18,7 +29,7 @@ async function loadBeltHolder() {
             <div class="holder-meta mt-1 mb-4">Since ${formatDate(data.acquired_date)}</div>
             <div class="d-flex justify-content-center gap-3">
                 <div class="stat-pill text-center">
-                    <div class="stat-value">${data.days_held ?? 0}</div>
+                    <div class="stat-value">${totalDays}</div>
                     <div class="stat-label">Days</div>
                 </div>
                 <div class="stat-pill text-center">
