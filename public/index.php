@@ -23,7 +23,7 @@ if (empty($apiKey)) {
 	die('Error: BALLDONTLIE_API_KEY environment variable is not set');
 }
 $ballDontLie = new BallDontLieClient($apiKey);
-
+ 
 // Load routes
 $webRoutes = require __DIR__ . '/../routes/web.php';
 $apiRoutes = require __DIR__ . '/../routes/api.php';
