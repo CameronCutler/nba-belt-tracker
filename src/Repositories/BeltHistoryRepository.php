@@ -68,8 +68,17 @@ class BeltHistoryRepository
      */
     public function getBeltHistory(?string $limit): ?array
     {
+        $seasonStart = $this->getSeasonStart();
+        $seasonActivityEnd = $this->getSeasonActivityEndDate();
+
         $sql = "SELECT bh.*, t.full_name, t.abbreviation AS team_name,
-                    CAST(JULIANDAY(COALESCE(bh.lost_date, DATE('now'))) - JULIANDAY(bh.acquired_date) AS INTEGER) AS days_held
+                    CAST(JULIANDAY(
+                        CASE
+                            WHEN bh.lost_date IS NOT NULL THEN bh.lost_date
+                            WHEN bh.acquired_date >= :season_start THEN MIN(DATE('now'), :season_activity_end)
+                            ELSE DATE('now')
+                        END
+                    ) - JULIANDAY(bh.acquired_date) AS INTEGER) AS days_held
                 FROM belt_history bh
                 JOIN teams t ON bh.team_id = t.id
                 ORDER BY bh.acquired_date DESC";
@@ -78,7 +87,11 @@ class BeltHistoryRepository
             $sql .= " LIMIT " . (int)$limit;
         }
         
-        $stmt = $this->db->query($sql);
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':season_start' => $seasonStart,
+            ':season_activity_end' => $seasonActivityEnd,
+        ]);
         return $stmt->fetchAll();
     }
 
@@ -90,18 +103,41 @@ class BeltHistoryRepository
     public function getBeltLeaders(): array
     {
         $seasonStart = $this->getSeasonStart();
+        $seasonActivityEnd = $this->getSeasonActivityEndDate();
+
         $stmt = $this->db->prepare("
             SELECT t.abbreviation AS team_name, t.full_name,
                 COUNT(*) AS total_reigns,
                 COALESCE(SUM(bh.defense_count), 0) AS total_defenses,
-                CAST(SUM(JULIANDAY(COALESCE(bh.lost_date, DATE('now'))) - JULIANDAY(bh.acquired_date)) AS INTEGER) AS total_days
+                CAST(SUM(JULIANDAY(COALESCE(bh.lost_date, MIN(DATE('now'), :season_activity_end))) - JULIANDAY(bh.acquired_date)) AS INTEGER) AS total_days
             FROM belt_history bh
             JOIN teams t ON bh.team_id = t.id
             WHERE bh.acquired_date >= ?
             GROUP BY bh.team_id, t.abbreviation, t.full_name
         ");
-        $stmt->execute([$seasonStart]);
+        $stmt->execute([
+            ':season_activity_end' => $seasonActivityEnd,
+            1 => $seasonStart,
+        ]);
         return $stmt->fetchAll();
+    }
+
+    private function getSeasonActivityEndDate(): string
+    {
+        $seasonStart = $this->getSeasonStart();
+        $seasonYear = (int) substr($seasonStart, 0, 4);
+
+        $stmt = $this->db->prepare(
+            'SELECT MAX(game_date) FROM games WHERE season = ? AND winner_team_id IS NOT NULL'
+        );
+        $stmt->execute([$seasonYear]);
+        $latestGameDate = $stmt->fetchColumn();
+
+        if (is_string($latestGameDate) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $latestGameDate)) {
+            return $latestGameDate;
+        }
+
+        return date('Y-m-d');
     }
 
     /**

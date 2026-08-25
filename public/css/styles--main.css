@@ -8,6 +8,33 @@ body { background: #0f1117; color: #e5e7eb; }
 .holder-name { color: #fbbf24; }
 .holder-since { color: #9ca3af; font-size: 0.9rem; }
 
+.offseason-banner {
+    max-width: 720px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid #374151;
+    border-left: 4px solid #f59e0b;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+.offseason-banner__title {
+    color: #fbbf24;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.offseason-banner__body {
+    color: #f3f4f6;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.offseason-banner__meta {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin-top: 3px;
+}
+
 .games-section { background: #0f1117; }
 
 .game-card {
@@ -254,6 +281,14 @@ body { background: #0f1117; color: #e5e7eb; }
         width: 52px;
         height: 52px;
     }
+
+    .offseason-banner__body {
+        font-size: 0.95rem;
+    }
+    .offseason-banner__meta {
+        font-size: 0.82rem;
+    }
+
     .team-abbr {
         font-size: 1.1rem;
     }
