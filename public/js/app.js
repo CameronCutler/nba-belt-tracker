@@ -11,7 +11,7 @@ async function loadBeltHolder() {
     if (!holderRes.ok) {
       section.innerHTML =
         '<span class="holder-meta">Belt holder unknown</span>';
-              <div class="holder-label mb-2">NBA CHAMPS</div>
+      <div class="holder-label mb-2">NBA CHAMPS</div>;
     }
 
     const abbr =
