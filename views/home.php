@@ -2,6 +2,8 @@
 $offseasonChampion = $_ENV['OFFSEASON_CHAMPION'] ?? 'New York Knicks';
 $nextSeasonLabel = $_ENV['NEXT_SEASON_LABEL'] ?? '2026-27';
 $nextSeasonStartRaw = $_ENV['NEXT_SEASON_START'] ?? '2026-10-20';
+$currentSeasonStartYear = (int) date('Y') - ((int) date('n') < 10 ? 1 : 0);
+$currentSeasonLabel = sprintf('%d-%02d', $currentSeasonStartYear, ($currentSeasonStartYear + 1) % 100);
 
 $nextSeasonStartDate = DateTimeImmutable::createFromFormat('Y-m-d', $nextSeasonStartRaw) ?: null;
 $today = new DateTimeImmutable('today');
@@ -9,11 +11,16 @@ $appJsPath = __DIR__ . '/../public/js/app.js';
 $appJsVersion = is_file($appJsPath) ? (string) filemtime($appJsPath) : '1';
 
 $countdownText = 'Tip-off date coming soon';
+$seasonBannerTitle = 'Offseason Update';
 $nextSeasonStartDisplay = $nextSeasonStartRaw;
 
 if ($nextSeasonStartDate instanceof DateTimeImmutable) {
     $nextSeasonStartDisplay = $nextSeasonStartDate->format('F j, Y');
     $daysUntil = (int) $today->diff($nextSeasonStartDate)->format('%r%a');
+
+    if ($daysUntil <= 0) {
+        $seasonBannerTitle = 'Season Update';
+    }
 
     if ($daysUntil > 1) {
         $countdownText = $daysUntil . ' days until opening night';
@@ -42,7 +49,7 @@ if ($nextSeasonStartDate instanceof DateTimeImmutable) {
         <img src="/img/nba_larryO_belt.png" alt="Championship Belt" class="img-fluid mb-4" style="max-height: 180px;">
         <h1 class="display-5 fw-bold mb-4">NBA Championship Belt Tracker</h1>
         <div class="offseason-banner mx-auto mb-4 text-start">
-            <div class="offseason-banner__title">🏀 Offseason Update</div>
+            <div class="offseason-banner__title">🏀 <?php echo htmlspecialchars($seasonBannerTitle, ENT_QUOTES, 'UTF-8'); ?></div>
             <div class="offseason-banner__body"><?php echo htmlspecialchars($offseasonChampion, ENT_QUOTES, 'UTF-8'); ?> are the reigning champions.</div>
             <div class="offseason-banner__meta">
                 <?php echo htmlspecialchars($nextSeasonLabel, ENT_QUOTES, 'UTF-8'); ?> season starts <?php echo htmlspecialchars($nextSeasonStartDisplay, ENT_QUOTES, 'UTF-8'); ?> · <?php echo htmlspecialchars($countdownText, ENT_QUOTES, 'UTF-8'); ?>
@@ -72,11 +79,11 @@ if ($nextSeasonStartDate instanceof DateTimeImmutable) {
 </div>
 
 <div class="container py-5">
-    <h2 class="fw-semibold mb-4" style="color:#e5e7eb;">Season Leaders 25'–26'</h2>
+    <h2 class="fw-semibold mb-4" style="color:#e5e7eb;">Season Leaders <?php echo htmlspecialchars($currentSeasonLabel, ENT_QUOTES, 'UTF-8'); ?></h2>
     <div id="belt-leaders" class="row g-3">
         <div class="col-12 text-secondary">Loading leaders...</div>
     </div>
-    <h2 class="fw-semibold mt-5 mb-4" style="color:#e5e7eb;">Belt History 25'–26'</h2>
+    <h2 class="fw-semibold mt-5 mb-4" style="color:#e5e7eb;">Belt History <?php echo htmlspecialchars($currentSeasonLabel, ENT_QUOTES, 'UTF-8'); ?></h2>
     <div id="belt-history" class="text-secondary">Loading history...</div>
 </div>
 

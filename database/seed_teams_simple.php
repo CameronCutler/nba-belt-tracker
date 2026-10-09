@@ -308,7 +308,7 @@ try {
     }
 
     echo "Successfully seeded " . count($teams) . " teams into the database.\n";
-    echo "OKC Thunder (ID: 21) is included as the initial belt holder.\n";
+    echo "All 30 NBA teams are available for belt initialization.\n";
 
 } catch (Exception $e) {
     echo "Error seeding teams: " . $e->getMessage() . "\n";

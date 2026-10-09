@@ -34,17 +34,23 @@ The NBA championship belt works like a boxing title — the defending champion h
    ```
 4. Visit [http://localhost:8080](http://localhost:8080)
 
-On first run the container seeds the full current season from the API — this may take a minute.
+The container prepares the database, teams, and opening belt holder at startup. To import completed games and calculate belt transfers, run the seeder after the day's games are final:
+
+```bash
+docker compose exec app php /var/www/database/seed_games_simple.php
+```
+
+Game seeding is not automatic; repeat this command as the season progresses. The live "Today's Games" view is fetched separately from Ball Don't Lie.
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/belt/holder` | Current belt holder with stats |
-| GET | `/api/games/today` | Today's games enriched with belt context |
-| GET | `/api/games/{date}` | Games from a specific date (YYYY-MM-DD) |
-| GET | `/api/games/belt` | All belt games for the current season |
-| GET | `/api/teams` | All active NBA teams |
+| Method | Endpoint            | Description                              |
+| ------ | ------------------- | ---------------------------------------- |
+| GET    | `/api/belt/holder`  | Current belt holder with stats           |
+| GET    | `/api/games/today`  | Today's games enriched with belt context |
+| GET    | `/api/games/{date}` | Games from a specific date (YYYY-MM-DD)  |
+| GET    | `/api/games/belt`   | All belt games for the current season    |
+| GET    | `/api/teams`        | All active NBA teams                     |
 
 ## Deployment
 

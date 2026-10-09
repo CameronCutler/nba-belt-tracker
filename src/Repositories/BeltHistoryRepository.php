@@ -58,7 +58,13 @@ class BeltHistoryRepository
         $month = (int) date('n');
         $year  = (int) date('Y');
         $seasonYear = $month >= 10 ? $year : $year - 1;
-        return "{$seasonYear}-10-01";
+
+        $configuredStart = $_ENV['NEXT_SEASON_START'] ?? '';
+        if (preg_match('/^' . $seasonYear . '-\d{2}-\d{2}$/', $configuredStart)) {
+            return $configuredStart;
+        }
+
+        return "{$seasonYear}-10-20";
     }
 
     /**
@@ -75,7 +81,7 @@ class BeltHistoryRepository
                     CAST(JULIANDAY(
                         CASE
                             WHEN bh.lost_date IS NOT NULL THEN bh.lost_date
-                            WHEN bh.acquired_date >= :season_start THEN MIN(DATE('now'), :season_activity_end)
+                            WHEN bh.acquired_date >= :season_start THEN MAX(bh.acquired_date, MIN(DATE('now'), :season_activity_end))
                             ELSE DATE('now')
                         END
                     ) - JULIANDAY(bh.acquired_date) AS INTEGER) AS days_held
@@ -109,7 +115,7 @@ class BeltHistoryRepository
             SELECT t.abbreviation AS team_name, t.full_name,
                 COUNT(*) AS total_reigns,
                 COALESCE(SUM(bh.defense_count), 0) AS total_defenses,
-                CAST(SUM(JULIANDAY(COALESCE(bh.lost_date, MIN(DATE('now'), :season_activity_end))) - JULIANDAY(bh.acquired_date)) AS INTEGER) AS total_days
+                CAST(SUM(JULIANDAY(COALESCE(bh.lost_date, MAX(bh.acquired_date, MIN(DATE('now'), :season_activity_end)))) - JULIANDAY(bh.acquired_date)) AS INTEGER) AS total_days
             FROM belt_history bh
             JOIN teams t ON bh.team_id = t.id
             WHERE bh.acquired_date >= ?

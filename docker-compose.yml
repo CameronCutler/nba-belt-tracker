@@ -7,11 +7,14 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - db_data:/var/www/database
+      - db_data:/var/www/storage
     environment:
       - BALLDONTLIE_API_KEY=${BALLDONTLIE_API_KEY}
-      - DB_PATH=/var/www/database/belt.db
+      - DB_PATH=/var/www/storage/belt.db
       - ENVIRONMENT=development
+      - OFFSEASON_CHAMPION=${OFFSEASON_CHAMPION:-New York Knicks}
+      - NEXT_SEASON_LABEL=${NEXT_SEASON_LABEL:-2026-27}
+      - NEXT_SEASON_START=${NEXT_SEASON_START:-2026-10-20}
 
 volumes:
   db_data:
