@@ -22,8 +22,13 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_sqlite mbstring exif pcntl bcmath gd curl
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Install Composer from its official installer and verify its published checksum
+RUN EXPECTED_CHECKSUM="$(curl -fsSL https://composer.github.io/installer.sig)" \
+    && curl -fsSL https://getcomposer.org/installer -o composer-setup.php \
+    && ACTUAL_CHECKSUM="$(sha384sum composer-setup.php | cut -d ' ' -f 1)" \
+    && [ "$EXPECTED_CHECKSUM" = "$ACTUAL_CHECKSUM" ] \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && rm composer-setup.php
 
 # Set working directory
 WORKDIR /var/www
